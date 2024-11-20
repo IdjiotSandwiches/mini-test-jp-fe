@@ -33,7 +33,7 @@ export default function SchedulePage() {
           <DateTimePicker data={data} state={state} />
           <div>
             <h2 className="text-3xl font-bold">{formatDate(date)}</h2>
-            <h5>{formatTime(startTime)} - {formatTime(endTime)}</h5>
+            <h5 className="text-lg font-medium">{formatTime(startTime)} - {formatTime(endTime)}</h5>
           </div>
         </div>
       </div>
