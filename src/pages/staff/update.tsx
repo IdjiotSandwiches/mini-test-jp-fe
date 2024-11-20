@@ -8,6 +8,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
+import { formatDate, formatTime } from "@/functions/formatDateTime";
 
 export default function UpdatePage() {
   const [date, setDate] = React.useState<Date | undefined>(new Date());
@@ -20,23 +21,6 @@ export default function UpdatePage() {
 
   const data = { date, startTime, endTime };
   const state = { setDate, setStartTime, setEndTime };
-
-  const formatDate = (date?: Date) => {
-    const formattedDate = new Intl.DateTimeFormat("en-ID", {
-      dateStyle: "full",
-    }).format(date);
-
-    return formattedDate;
-  };
-
-  const formatTime = (time?: Date) => {
-    const formattedTime = new Intl.DateTimeFormat("en-ID", {
-      hour: "2-digit",
-      minute: "2-digit",
-    }).format(time);
-
-    return formattedTime;
-  };
 
   return (
     <>

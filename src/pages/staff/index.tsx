@@ -10,6 +10,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Link } from "react-router-dom";
+import { formatDate, formatTime } from "@/functions/formatDateTime";
 
 export default function SchedulePage() {
   const [date, setDate] = React.useState<Date | undefined>(new Date());
@@ -22,23 +23,6 @@ export default function SchedulePage() {
 
   const data = { date, startTime, endTime };
   const state = { setDate, setStartTime, setEndTime };
-
-  const formatDate = (date?: Date) => {
-    const formattedDate = new Intl.DateTimeFormat("en-ID", {
-      dateStyle: "full",
-    }).format(date);
-
-    return formattedDate;
-  };
-
-  const formatTime = (time?: Date) => {
-    const formattedTime = new Intl.DateTimeFormat("en-ID", {
-      hour: "2-digit",
-      minute: "2-digit",
-    }).format(time);
-
-    return formattedTime;
-  };
 
   return (
     <>
