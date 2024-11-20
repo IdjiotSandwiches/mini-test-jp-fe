@@ -9,6 +9,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { Link } from "react-router-dom";
 
 export default function SchedulePage() {
   const [date, setDate] = React.useState<Date | undefined>(new Date());
@@ -69,7 +70,9 @@ export default function SchedulePage() {
                     <TableCell>{formatDate(date)}</TableCell>
                     <TableCell className="flex items-center gap-2">
                       <Button className="bg-lime-500">VIEW</Button>
-                      <Button className="bg-orange-400">UPDATE</Button>
+                      <Button className="bg-orange-400">
+                        <Link to={'/update'}>UPDATE</Link>
+                      </Button>
                     </TableCell>
                   </TableRow>
                 </TableBody>
