@@ -21,10 +21,8 @@ function App() {
 
   return (
     <>
-      <div className="min-h-screen max-w-screen-lg mx-auto flex items-center">
-        <div className="flex gap-10 w-full">
-          <RouterProvider router={router} />
-        </div>
+      <div className="min-h-screen max-w-screen-lg mx-auto pt-60">
+        <RouterProvider router={router} />
       </div>
     </>
   );
