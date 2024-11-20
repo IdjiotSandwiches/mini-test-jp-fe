@@ -24,35 +24,33 @@ export default function UpdatePage() {
 
   return (
     <>
-      <div className="flex gap-10 w-full">
-        <DateTimePicker data={data} state={state} />
-        <div className="flex flex-col gap-4 w-full">
-          <div>
-            <label className="font-medium text-lg">Eligible Students</label>
-            <Select>
-              <SelectTrigger className="w-1/2">
-                <SelectValue placeholder="Select student" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="idjiot_sandwiches">
-                  Idjiot Sandwiches
-                </SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-          <div>
-            <h2 className="text-3xl font-bold">Date Chosen:</h2>
-            <p className="text-xl">{formatDate(date)}</p>
-          </div>
-          <div>
-            <h2 className="text-3xl font-bold">Time Chosen:</h2>
-            <p className="text-xl">
-              {formatTime(startTime)} - {formatTime(endTime)}
-            </p>
-          </div>
-          <div>
-            <Button className="bg-sky-500">INSERT</Button>
-          </div>
+      <DateTimePicker data={data} state={state} />
+      <div className="flex flex-col gap-4 w-full">
+        <div>
+          <label className="font-medium text-lg">Eligible Students</label>
+          <Select>
+            <SelectTrigger className="w-1/2">
+              <SelectValue placeholder="Select student" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="idjiot_sandwiches">
+                Idjiot Sandwiches
+              </SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+        <div>
+          <h2 className="text-3xl font-bold">Date Chosen:</h2>
+          <p className="text-xl">{formatDate(date)}</p>
+        </div>
+        <div>
+          <h2 className="text-3xl font-bold">Time Chosen:</h2>
+          <p className="text-xl">
+            {formatTime(startTime)} - {formatTime(endTime)}
+          </p>
+        </div>
+        <div>
+          <Button className="bg-sky-500">INSERT</Button>
         </div>
       </div>
     </>
