@@ -1,9 +1,15 @@
 /** @type {import('tailwindcss').Config} */
+import { nextui } from '@nextui-org/theme';
 const flowbite = require("flowbite-react/tailwind");
 
 export default {
   darkMode: ["class"],
-  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}", flowbite.content()],
+  content: [
+    "./index.html", 
+    "./src/**/*.{js,ts,jsx,tsx}", 
+    flowbite.content(),
+    "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
+  ],
   theme: {
     extend: {
       borderRadius: {
@@ -55,5 +61,9 @@ export default {
       },
     },
   },
-  plugins: [require("tailwindcss-animate"), flowbite.plugin()],
+  plugins: [
+    require("tailwindcss-animate"), 
+    flowbite.plugin(),
+    nextui(),
+  ],
 };
