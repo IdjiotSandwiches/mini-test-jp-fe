@@ -9,7 +9,7 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
 }) => {
   return (
     <>
-      <div className="grid gap-4 w-min mx-auto">
+      <div className="grid gap-4 w-min">
         <Calendar
           mode="single"
           selected={data.date}
