@@ -1,20 +1,18 @@
 import React from "react";
-import { Calendar } from "@/components/ui/calendar";
-import { TimeInput } from "@nextui-org/date-input";
+import { DateTimePicker } from "@/components/ui/datetime-picker";
 
 export default function SchedulePage() {
   const [date, setDate] = React.useState<Date | undefined>(new Date());
+  const [startTime, setStartTime] = React.useState<Date | undefined>(undefined);
+  const [endTime, setEndTime] = React.useState<Date | undefined>(undefined);
+
+  const data = { date, startTime, endTime };
+  const state = { setDate, setStartTime, setEndTime };
+
   return (
     <>
-      <div className="">
-        <Calendar
-          mode="single"
-          selected={date}
-          onSelect={setDate}
-          className="rounded-md border"
-        />
-        <TimeInput label="Start Time" />
-        <TimeInput label="End Time" />
+		<div className="">
+        <DateTimePicker data={data} state={state} />
       </div>
     </>
   );
