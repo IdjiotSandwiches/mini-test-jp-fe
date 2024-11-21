@@ -1,9 +1,9 @@
 import React from "react";
 import { Calendar } from "@/components/ui/calendar";
 import { TimeInput } from "@/components/ui/time-input";
-import { DateTimePickerProps } from "@/interfaces/DateTimePicker";
+import { IDateTimePickerProps } from "@/interfaces/DateTimePicker";
 
-const DateTimePicker: React.FC<DateTimePickerProps> = ({
+const DateTimePicker: React.FC<IDateTimePickerProps> = ({
   data,
   state,
 }) => {
