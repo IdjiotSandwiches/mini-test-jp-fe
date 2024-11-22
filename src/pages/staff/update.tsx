@@ -58,7 +58,6 @@ export default function UpdatePage() {
   }, [id]);
 
   const handleUpdateData = async () => {
-    console.log(startTime, endTime);
     if (
       startTime.getTime() > endTime.getTime() ||
       endTime.getTime() < startTime.getTime() ||
