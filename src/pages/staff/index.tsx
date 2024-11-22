@@ -74,17 +74,19 @@ export default function SchedulePage() {
             </h5>
           </div>
           <div>
-            <Button className="bg-sky-500">INSERT</Button>
+            <Link href={'/insert'}>
+              <Button className="bg-sky-500">INSERT</Button>
+            </Link>
             <p className="mt-4 text-gray-600 text-sm">
               Use DateTime filter beside to filtering the schedules.
             </p>
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead className="">Nama</TableHead>
+                  <TableHead>Nama</TableHead>
                   <TableHead>NIM</TableHead>
                   <TableHead>Tanggal Sidang</TableHead>
-                  <TableHead className="">Action</TableHead>
+                  <TableHead>Action</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -106,7 +108,10 @@ export default function SchedulePage() {
                           >
                             <Button className="bg-lime-500">VIEW</Button>
                           </Link>
-                          <Link href={`/update/${schedule.id}`} className="text-white">
+                          <Link
+                            href={`/update/${schedule.id}`}
+                            className="text-white"
+                          >
                             <Button className="bg-orange-400">UPDATE</Button>
                           </Link>
                         </TableCell>

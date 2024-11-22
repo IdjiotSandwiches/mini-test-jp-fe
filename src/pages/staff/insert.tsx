@@ -9,13 +9,15 @@ import {
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { formatDate, formatTime } from "@/functions/formatDateTime";
+import { Link } from "@nextui-org/react";
+import { ChevronLeft } from "lucide-react";
 
 export default function InsertPage() {
   const [date, setDate] = React.useState<Date | undefined>(new Date());
-  const [startTime, setStartTime] = React.useState<Date | undefined>(
+  const [startTime, setStartTime] = React.useState<Date>(
     new Date(0, 0, 0, 0, 0, 0, 0)
   );
-  const [endTime, setEndTime] = React.useState<Date | undefined>(
+  const [endTime, setEndTime] = React.useState<Date>(
     new Date(0, 0, 0, 0, 0, 0, 0)
   );
 
@@ -27,6 +29,11 @@ export default function InsertPage() {
       <div className="flex gap-10 w-full">
         <DateTimePicker data={data} state={state} />
         <div className="flex flex-col gap-4 w-full">
+          <Link href={"/"}>
+            <Button className="pl-2">
+              <ChevronLeft /> Back
+            </Button>
+          </Link>
           <div>
             <label className="font-medium text-lg">Eligible Students</label>
             <Select>

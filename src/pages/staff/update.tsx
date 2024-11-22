@@ -7,6 +7,8 @@ import { scheduleServiceApi } from "@/functions/apiClient";
 import { IScheduleProps } from "@/interfaces/Schedule";
 import { useNavigate } from "react-router-dom";
 import { format } from "date-fns";
+import { Link } from "@nextui-org/react";
+import { ChevronLeft } from "lucide-react";
 
 export default function UpdatePage() {
   const [date, setDate] = React.useState<Date | undefined>(new Date());
@@ -35,9 +37,18 @@ export default function UpdatePage() {
         const currentDate = new Date();
 
         setDate(new Date(scheduleData.date));
-        setStartTime(new Date(`${currentDate.toISOString().split("T")[0]} ${scheduleData.startTime}`));
-        setEndTime(new Date(`${currentDate.toISOString().split("T")[0]} ${scheduleData.endTime}`));
-
+        setStartTime(
+          new Date(
+            `${currentDate.toISOString().split("T")[0]} ${
+              scheduleData.startTime
+            }`
+          )
+        );
+        setEndTime(
+          new Date(
+            `${currentDate.toISOString().split("T")[0]} ${scheduleData.endTime}`
+          )
+        );
       } catch (error) {
         console.log(error);
       }
@@ -47,8 +58,12 @@ export default function UpdatePage() {
   }, [id]);
 
   const handleUpdateData = async () => {
-    console.log(startTime > endTime)
-    if (startTime > endTime) {
+    console.log(startTime, endTime);
+    if (
+      startTime.getTime() > endTime.getTime() ||
+      endTime.getTime() < startTime.getTime() ||
+      startTime.getTime() === endTime.getTime()
+    ) {
       setErrorMsg("Please use appropriate time!");
       return;
     }
@@ -77,6 +92,11 @@ export default function UpdatePage() {
           <>
             <DateTimePicker data={data} state={state} />
             <div className="flex flex-col gap-4">
+              <Link href={"/"}>
+                <Button className="pl-2">
+                  <ChevronLeft /> Back
+                </Button>
+              </Link>
               <div>
                 <h3 className="font-bold text-3xl">Idjiot Sandwiches</h3>
                 <h4 className="text-xl">2118033615</h4>

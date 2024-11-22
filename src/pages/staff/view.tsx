@@ -4,6 +4,9 @@ import { Image } from "lucide-react";
 import { IScheduleProps } from "@/interfaces/Schedule";
 import { scheduleServiceApi } from "@/functions/apiClient";
 import { formatDate, formatTime } from "@/functions/formatDateTime";
+import { Link } from "@nextui-org/react";
+import { ChevronLeft } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export default function ViewPage() {
   const { id } = useParams();
@@ -25,6 +28,11 @@ export default function ViewPage() {
   return (
     <>
       <div>
+        <Link href={"/"}>
+          <Button className="pl-2">
+            <ChevronLeft /> Back
+          </Button>
+        </Link>
         <h2 className="font-bold text-4xl mb-4">Student Information</h2>
         <div className="flex gap-10 w-full">
           <div className="w-52 h-64 flex justify-center items-center bg-gray-400/30 rounded-md">
