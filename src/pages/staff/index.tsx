@@ -9,25 +9,63 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Link } from "react-router-dom";
+import { Link } from "@nextui-org/react";
 import { formatDate, formatTime } from "@/functions/formatDateTime";
+import { scheduleServiceApi } from "@/functions/apiClient";
+import { IScheduleProps } from "@/interfaces/Schedule";
+import { format } from "date-fns";
 
 export default function SchedulePage() {
   const [date, setDate] = React.useState<Date | undefined>(new Date());
-  const [startTime, setStartTime] = React.useState<Date | undefined>(
+  const [startTime, setStartTime] = React.useState<Date>(
     new Date(0, 0, 0, 0, 0, 0, 0)
   );
-  const [endTime, setEndTime] = React.useState<Date | undefined>(
+  const [endTime, setEndTime] = React.useState<Date>(
     new Date(0, 0, 0, 0, 0, 0, 0)
   );
+  const [schedules, setSchedules] = React.useState<Array<IScheduleProps>>([]);
 
   const data = { date, startTime, endTime };
   const state = { setDate, setStartTime, setEndTime };
 
+  React.useEffect(() => {
+    const fetch = async () => {
+      try {
+        const schedules = await scheduleServiceApi.get(`/api/schedule/`);
+        setSchedules(schedules.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetch();
+  }, []);
+
+  const fetchSchedules = async () => {
+    try {
+      const data = {
+        date: format(date ?? new Date(), "yyyy-MM-dd").toString(),
+        startTime: format(startTime, "HH:mm:ss").toString(),
+        endTime: format(endTime, "HH:mm:ss").toString(),
+      };
+
+      const schedules = await scheduleServiceApi.post(
+        `/api/schedule/range-schedules`,
+        data
+      );
+      setSchedules(schedules.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       <div className="flex gap-10 w-full">
-        <DateTimePicker data={data} state={state} />
+        <div className="grid gap-4">
+          <DateTimePicker data={data} state={state} />
+          <Button onClick={fetchSchedules}>FILTER</Button>
+        </div>
         <div className="flex flex-col gap-2 w-full">
           <div>
             <h2 className="text-3xl font-bold">{formatDate(date)}</h2>
@@ -36,30 +74,51 @@ export default function SchedulePage() {
             </h5>
           </div>
           <div>
-            <Button className="bg-sky-500">INSERT</Button>
+            <Link href={'/insert'}>
+              <Button className="bg-sky-500">INSERT</Button>
+            </Link>
+            <p className="mt-4 text-gray-600 text-sm">
+              Use DateTime filter beside to filtering the schedules.
+            </p>
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead className="">Nama</TableHead>
+                  <TableHead>Nama</TableHead>
                   <TableHead>NIM</TableHead>
                   <TableHead>Tanggal Sidang</TableHead>
-                  <TableHead className="">Action</TableHead>
+                  <TableHead>Action</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
-                <TableRow>
-                  <TableCell className="font-medium">
-                    Idjiot Sandwiches
-                  </TableCell>
-                  <TableCell>2118033615</TableCell>
-                  <TableCell>{formatDate(date)}</TableCell>
-                  <TableCell className="flex items-center gap-2">
-                    <Button className="bg-lime-500">VIEW</Button>
-                    <Button className="bg-orange-400">
-                      <Link to={"/update"}>UPDATE</Link>
-                    </Button>
-                  </TableCell>
-                </TableRow>
+                {schedules.map((schedule, idx) => {
+                  return (
+                    <>
+                      <TableRow key={idx}>
+                        <TableCell className="font-medium">
+                          {schedule.name}
+                        </TableCell>
+                        <TableCell>{schedule.nim}</TableCell>
+                        <TableCell>
+                          {formatDate(new Date(schedule.date ?? ""))}
+                        </TableCell>
+                        <TableCell className="flex items-center gap-2">
+                          <Link
+                            href={`/view/${schedule.id}`}
+                            className="text-white"
+                          >
+                            <Button className="bg-lime-500">VIEW</Button>
+                          </Link>
+                          <Link
+                            href={`/update/${schedule.id}`}
+                            className="text-white"
+                          >
+                            <Button className="bg-orange-400">UPDATE</Button>
+                          </Link>
+                        </TableCell>
+                      </TableRow>
+                    </>
+                  );
+                })}
               </TableBody>
             </Table>
           </div>

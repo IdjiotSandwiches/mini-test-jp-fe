@@ -1,7 +1,7 @@
 import React from "react";
-import { TimeInputProps } from "@/interfaces/DateTimePicker";
+import { ITimeInputProps } from "@/interfaces/DateTimePicker";
 
-const TimeInput: React.FC<TimeInputProps> = ({ label, name, setTime }) => {
+const TimeInput: React.FC<ITimeInputProps> = ({ label, name, time, setTime }) => {
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const time = e.target.value;
     if(time) {
@@ -24,7 +24,7 @@ const TimeInput: React.FC<TimeInputProps> = ({ label, name, setTime }) => {
           name={name}
           className="rounded-md border-gray-300/60"
           onChange={onChange}
-          value={"00:00"}
+          value={time}
         />
       </div>
     </>

@@ -11,7 +11,7 @@ function App() {
       element: <SchedulePage />,
     },
     {
-      path: "/view",
+      path: "/view/:id",
       element: <ViewPage />,
     },
     {
@@ -19,7 +19,7 @@ function App() {
       element: <InsertPage />
     },
     {
-      path: "/update",
+      path: "/update/:id",
       element: <UpdatePage />
     }
   ]);

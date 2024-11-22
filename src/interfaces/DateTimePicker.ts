@@ -1,22 +1,23 @@
-export interface DateTimePickerStateProps {
+export interface IDateTimePickerStateProps {
   setDate: React.Dispatch<React.SetStateAction<Date | undefined>>;
-  setStartTime: React.Dispatch<React.SetStateAction<Date | undefined>>;
-  setEndTime: React.Dispatch<React.SetStateAction<Date | undefined>>;
+  setStartTime: React.Dispatch<React.SetStateAction<Date>>;
+  setEndTime: React.Dispatch<React.SetStateAction<Date>>;
 }
 
-export interface DateTimePickerDataProps {
+export interface IDateTimePickerDataProps {
   date: Date | undefined;
-  startTime: Date | undefined;
-  endTime: Date | undefined;
+  startTime: Date;
+  endTime: Date;
 }
 
-export interface DateTimePickerProps {
-  data: DateTimePickerDataProps;
-  state: DateTimePickerStateProps;
+export interface IDateTimePickerProps {
+  data: IDateTimePickerDataProps;
+  state: IDateTimePickerStateProps;
 }
 
-export interface TimeInputProps {
+export interface ITimeInputProps {
   label: string;
   name: string;
-  setTime: React.Dispatch<React.SetStateAction<Date | undefined>>;
+  time: string;
+  setTime: React.Dispatch<React.SetStateAction<Date>>;
 }
