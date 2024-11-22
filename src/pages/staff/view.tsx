@@ -12,8 +12,8 @@ export default function ViewPage() {
   React.useEffect(() => {
     const fetch = async () => {
       try {
-        const schedules = await scheduleServiceApi.get(`/api/schedule/${id}`);
-        setData(schedules.data);
+        const schedule = await scheduleServiceApi.get(`/api/schedule/${id}`);
+        setData(schedule.data);
       } catch (error) {
         console.log(error);
       }

@@ -19,7 +19,7 @@ function App() {
       element: <InsertPage />
     },
     {
-      path: "/update",
+      path: "/update/:id",
       element: <UpdatePage />
     }
   ]);

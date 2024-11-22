@@ -23,9 +23,7 @@ export default function SchedulePage() {
   const [endTime, setEndTime] = React.useState<Date>(
     new Date(0, 0, 0, 0, 0, 0, 0)
   );
-  const [schedules, setSchedules] = React.useState<
-    Array<IScheduleProps>
-  >([]);
+  const [schedules, setSchedules] = React.useState<Array<IScheduleProps>>([]);
 
   const data = { date, startTime, endTime };
   const state = { setDate, setStartTime, setEndTime };
@@ -51,7 +49,10 @@ export default function SchedulePage() {
         endTime: format(endTime, "HH:mm:ss").toString(),
       };
 
-      const schedules = await scheduleServiceApi.post(`/api/schedule/range-schedules`, data);
+      const schedules = await scheduleServiceApi.post(
+        `/api/schedule/range-schedules`,
+        data
+      );
       setSchedules(schedules.data);
     } catch (error) {
       console.log(error);
@@ -74,6 +75,9 @@ export default function SchedulePage() {
           </div>
           <div>
             <Button className="bg-sky-500">INSERT</Button>
+            <p className="mt-4 text-gray-600 text-sm">
+              Use DateTime filter beside to filtering the schedules.
+            </p>
             <Table>
               <TableHeader>
                 <TableRow>
@@ -96,16 +100,15 @@ export default function SchedulePage() {
                           {formatDate(new Date(schedule.date ?? ""))}
                         </TableCell>
                         <TableCell className="flex items-center gap-2">
-                          <Button className="bg-lime-500">
-                            <Link href={`/view/${schedule.id}`} className="text-white">
-                              VIEW
-                            </Link>
-                          </Button>
-                          <Button className="bg-orange-400">
-                            <Link href="/update" className="text-white">
-                              UPDATE
-                            </Link>
-                          </Button>
+                          <Link
+                            href={`/view/${schedule.id}`}
+                            className="text-white"
+                          >
+                            <Button className="bg-lime-500">VIEW</Button>
+                          </Link>
+                          <Link href={`/update/${schedule.id}`} className="text-white">
+                            <Button className="bg-orange-400">UPDATE</Button>
+                          </Link>
                         </TableCell>
                       </TableRow>
                     </>
