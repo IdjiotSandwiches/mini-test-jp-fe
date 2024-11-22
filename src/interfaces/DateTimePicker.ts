@@ -18,5 +18,6 @@ export interface IDateTimePickerProps {
 export interface ITimeInputProps {
   label: string;
   name: string;
+  time: string;
   setTime: React.Dispatch<React.SetStateAction<Date>>;
 }

@@ -8,6 +8,7 @@ export interface IScheduleProps {
 }
 
 export interface IUpdateScheduleProps {
+  id: Number;
   date: Date;
   startTime: Date;
   endTime: Date;
