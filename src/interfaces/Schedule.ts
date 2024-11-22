@@ -1,9 +1,8 @@
-// import { IDateTimePickerDataProps } from "@/interfaces/DateTimePicker";
-
 export interface IScheduleProps {
+  id: Number;
   name: string;
   nim: string;
-  date: Date | undefined;
+  date: Date;
   startTime: Date;
   endTime: Date;
 }

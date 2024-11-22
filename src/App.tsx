@@ -14,7 +14,7 @@ function App() {
       element: <UpdatePage />,
     },
     {
-      path: "/view",
+      path: "/view/:id",
       element: <ViewPage />,
     },
   ]);

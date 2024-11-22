@@ -96,7 +96,11 @@ export default function SchedulePage() {
                           {formatDate(new Date(schedule.date ?? ""))}
                         </TableCell>
                         <TableCell className="flex items-center gap-2">
-                          <Button className="bg-lime-500">VIEW</Button>
+                          <Button className="bg-lime-500">
+                            <Link href={`/view/${schedule.id}`} className="text-white">
+                              VIEW
+                            </Link>
+                          </Button>
                           <Button className="bg-orange-400">
                             <Link href="/update" className="text-white">
                               UPDATE
