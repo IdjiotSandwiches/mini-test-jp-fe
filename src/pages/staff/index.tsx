@@ -12,7 +12,7 @@ import {
 import { Link } from "@nextui-org/react";
 import { formatDate, formatTime } from "@/functions/formatDateTime";
 import { scheduleServiceApi } from "@/functions/apiClient";
-import { IDateTimePickerDataProps } from "@/interfaces/DateTimePicker";
+import { IScheduleProps } from "@/interfaces/Schedule";
 import { format } from "date-fns";
 
 export default function SchedulePage() {
@@ -24,20 +24,34 @@ export default function SchedulePage() {
     new Date(0, 0, 0, 0, 0, 0, 0)
   );
   const [schedules, setSchedules] = React.useState<
-    Array<IDateTimePickerDataProps>
+    Array<IScheduleProps>
   >([]);
 
   const data = { date, startTime, endTime };
   const state = { setDate, setStartTime, setEndTime };
 
+  React.useEffect(() => {
+    const fetch = async () => {
+      try {
+        const schedules = await scheduleServiceApi.get(`/api/schedule/`);
+        setSchedules(schedules.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetch();
+  }, []);
+
   const fetchSchedules = async () => {
     try {
-      let formattedDate = format(date ?? new Date(), "yyyy-MM-dd");
-      let formattedStartTime = format(startTime, "HH:mm:ss");
-      let formattedEndTime = format(endTime, "HH:mm:ss");
-      const schedules = await scheduleServiceApi.get(
-        `/api/schedule/${formattedDate}/${formattedStartTime}/${formattedEndTime}`
-      );
+      const data = {
+        date: format(date ?? new Date(), "yyyy-MM-dd").toString(),
+        startTime: format(startTime, "HH:mm:ss").toString(),
+        endTime: format(endTime, "HH:mm:ss").toString(),
+      };
+
+      const schedules = await scheduleServiceApi.post(`/api/schedule/range-schedules`, data);
       setSchedules(schedules.data);
     } catch (error) {
       console.log(error);
@@ -75,16 +89,18 @@ export default function SchedulePage() {
                     <>
                       <TableRow key={idx}>
                         <TableCell className="font-medium">
-                          Idjiot Sandwiches
+                          {schedule.name}
                         </TableCell>
-                        <TableCell>2118033615</TableCell>
+                        <TableCell>{schedule.nim}</TableCell>
                         <TableCell>
-                          {formatDate(new Date(schedule.date ?? ''))}
+                          {formatDate(new Date(schedule.date ?? ""))}
                         </TableCell>
                         <TableCell className="flex items-center gap-2">
                           <Button className="bg-lime-500">VIEW</Button>
                           <Button className="bg-orange-400">
-                            <Link href="/update" className="text-white">UPDATE</Link>
+                            <Link href="/update" className="text-white">
+                              UPDATE
+                            </Link>
                           </Button>
                         </TableCell>
                       </TableRow>
