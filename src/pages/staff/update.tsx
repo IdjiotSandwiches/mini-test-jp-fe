@@ -1,12 +1,5 @@
 import React from "react";
 import { DateTimePicker } from "@/components/ui/datetime-picker";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { formatDate, formatTime } from "@/functions/formatDateTime";
 
@@ -26,32 +19,21 @@ export default function UpdatePage() {
     <>
       <div className="flex gap-10 w-full">
         <DateTimePicker data={data} state={state} />
-        <div className="flex flex-col gap-4 w-full">
+        <div className="flex flex-col gap-4">
           <div>
-            <label className="font-medium text-lg">Eligible Students</label>
-            <Select>
-              <SelectTrigger className="w-1/2">
-                <SelectValue placeholder="Select student" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="idjiot_sandwiches">
-                  Idjiot Sandwiches
-                </SelectItem>
-              </SelectContent>
-            </Select>
+            <h3 className="font-bold text-3xl">Idjiot Sandwiches</h3>
+            <h4 className="text-xl">2118033615</h4>
           </div>
           <div>
-            <h2 className="text-3xl font-bold">Date Chosen:</h2>
-            <p className="text-xl">{formatDate(date)}</p>
+            <h4 className="font-bold text-xl">Updated Date:</h4>
+            <h5 className="text-lg">{formatDate(date)}</h5>
           </div>
           <div>
-            <h2 className="text-3xl font-bold">Time Chosen:</h2>
-            <p className="text-xl">
-              {formatTime(startTime)} - {formatTime(endTime)}
-            </p>
+            <h4 className="font-bold text-xl">Updated Time:</h4>
+            <h5 className="text-lg">{formatTime(startTime)} - {formatTime(endTime)}</h5>
           </div>
           <div>
-            <Button className="bg-sky-500">INSERT</Button>
+            <Button className="bg-orange-400">UPDATE</Button>
           </div>
         </div>
       </div>

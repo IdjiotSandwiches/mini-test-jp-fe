@@ -1,7 +1,8 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import SchedulePage from "@/pages/staff/index";
-import UpdatePage from "@/pages/staff/update";
 import ViewPage from "@/pages/staff/view";
+import InsertPage from "@/pages/staff/insert";
+import UpdatePage from "./pages/staff/update";
 
 function App() {
   const router = createBrowserRouter([
@@ -10,13 +11,17 @@ function App() {
       element: <SchedulePage />,
     },
     {
-      path: "/update",
-      element: <UpdatePage />,
-    },
-    {
       path: "/view/:id",
       element: <ViewPage />,
     },
+    {
+      path: "/insert",
+      element: <InsertPage />
+    },
+    {
+      path: "/update",
+      element: <UpdatePage />
+    }
   ]);
 
   return (

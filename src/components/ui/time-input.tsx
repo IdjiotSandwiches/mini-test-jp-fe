@@ -24,6 +24,7 @@ const TimeInput: React.FC<ITimeInputProps> = ({ label, name, setTime }) => {
           name={name}
           className="rounded-md border-gray-300/60"
           onChange={onChange}
+          value={"00:00"}
         />
       </div>
     </>
